@@ -1,7 +1,6 @@
 import pandas as pd 
 import numpy as np
 # print (scipy.__version__)
-from IPython.display import Image
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 from flask import Flask, request, jsonify
