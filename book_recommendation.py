@@ -1,18 +1,6 @@
 import pandas as pd 
-import matplotlib.pyplot as plt 
-import seaborn as sns
-from sklearn import metrics
 import numpy as np
-from sklearn import preprocessing
-from sklearn.model_selection import train_test_split
-import scipy.stats as stats
-import scipy
-from sklearn.metrics import silhouette_samples, silhouette_score
-from sklearn.cluster import KMeans
-import random
-from sklearn.linear_model import LinearRegression
-from sklearn.linear_model import LogisticRegression
-print (scipy.__version__)
+# print (scipy.__version__)
 from IPython.display import Image
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
