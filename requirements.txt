@@ -3,12 +3,12 @@ gunicorn>=21.2,<22.0
 dj-database-url>=2.0,<3.0
 whitenoise[brotli]>=6.0,<7.0
 Flask==2.0.1
-scikit-learn==0.24.2
 pandas==1.2.4
 matplotlib==3.3.4
 seaborn==0.11.1
 numpy==1.20.2
 scipy==1.6.2
+scikit-learn==0.24.2
 
 
 # Uncomment these lines to use a Postgres database. Both are needed, since in production
