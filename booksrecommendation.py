@@ -1,15 +1,14 @@
 import pandas as pd 
 import numpy as np
-# print (scipy.__version__)
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
 data = pd.read_csv('bestsellers_with_categories_2022_03_27.csv')
 
-# riottenere dati quantitativi e qualitativi
+# Retrieve quantitative and qualitative data
 data['Genre'] = np.where(data['Genre'] == 1, "Fiction", "Non Fiction")
 quantitative_data = data[['Reviews','Year','Price']]
 qualitative_data = data[['Name','Author','Genre']]
@@ -56,11 +55,30 @@ def get_unique_recommendations(book_title, num_recommendations=10, cosine_sim=co
 @app.route('/get_recommendations', methods=['GET'])
 def recommend_books():
     book_title = request.args.get('title')
-    num_recommendations = int(request.args.get('num_recommendations', 10))
+
+    if not book_title:
+        return jsonify({"error": "Please provide a valid 'title' parameter."}), 400
+
+    num_recommendations = request.args.get('num_recommendations', 10)
+
+    try:
+        num_recommendations = int(num_recommendations)
+    except ValueError:
+        return jsonify({"error": "'num_recommendations' must be a valid integer."}), 400
 
     recommended_books = get_unique_recommendations(book_title, num_recommendations)
     
     return jsonify({"recommendations": recommended_books})
+
+# Define a homepage view
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+# Define a custom error handler for 404 Not Found
+@app.errorhandler(404)
+def page_not_found(e):
+    return jsonify({"error": "The requested URL was not found on this server."}), 404
 
 if __name__ == '__main__':
     app.run(debug=True)
