@@ -1,6 +1,6 @@
 import requests
 
-url = "http://127.0.0.1:5000/get_recommendations"
+url = "https://blooming-ridge-95700-a04b44e99aa6.herokuapp.com/get_recommendations"
 params = {"title": "A Promised Land", "num_recommendations": 15}
 
 response = requests.get(url, params=params)
